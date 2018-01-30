@@ -1,0 +1,65 @@
+#include "syscall.h"
+#include "copyright.h"
+
+int ConvertToInt(char *s, int len);
+
+int main()
+{
+	int idFile1;
+	int idFile2;
+	int id;
+	char s[10];
+	int i = 0;
+	int N;
+
+	//CreateF("information.txt");
+	CreateF("output.txt");
+
+	
+	
+	idFile1 = OpenF("input.txt", 0);
+	//idFile2 = OpenF("information.txt", 0);
+	//WriteF("0\n", 2, idFile2);
+	//CloseF(idFile2);
+
+	i = 0;
+	ReadF(&s[i], 1, idFile1);
+	do
+	{
+		++i;
+		ReadF(&s[i], 1, idFile1);
+	} while (s[i] != '\n');
+
+	s[i] = '\0';
+
+	CloseF(idFile1);
+
+	
+/*
+	N = ConvertToInt(s, i);
+	
+	CreateSemaphore("mutex", 1);
+	for (i = 0; i < N; ++i)
+	{
+
+		id = Exec("./test/SinhVien");
+		Join(id);
+		id = Exec("./test/VoiNuoc");
+		Join(id);
+	}
+*/
+	Exit(0);
+	return 0;
+}
+
+int ConvertToInt(char *s, int len)
+{
+	int i;
+	int num = 0;
+
+	for (i = 0; i < len; ++i)
+	{
+		num = num * 10 + s[i] - 48;
+	}
+	return num;
+}
